@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/SpaceDust18/MarketBackEnd/issues"
   },
-  "homepage": "https://github.com/SpaceDust18/MarketBackEnd#readme"
+  "homepage": "https://github.com/SpaceDust18/MarketBackEnd#readme",
+  "keywords": [],
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
