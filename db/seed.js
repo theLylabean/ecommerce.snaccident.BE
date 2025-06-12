@@ -1,8 +1,18 @@
 import db from "./client.js";
 
-async function productsSeed(){
-    await db.connect();
+import { createUser } from "./queries/users";
+import { createOrder } from "./queries/users";
 
+const finalSeed = async() => {
+await db.connect();
+await seedUsers();
+await seedOrders();
+await productSeed();
+await db.end();
+console.log("🌱 Database seeded.");
+}
+
+async function productSeed(){
     const sql = `
     DELETE FROM products;
 
@@ -164,3 +174,13 @@ async function productsSeed(){
         )
     `
 }
+
+async function seedUsers(){
+
+}
+
+async function seedOrders(){
+
+}
+
+finalSeed();
