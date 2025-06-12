@@ -9,7 +9,7 @@ async function productsSeed(){
     INSERT INTO products (title, image_url, flavor, price, dose, total, quantity, strain, potency, description) VALUES
         (
             'Gem Stoned Chocolates', 
-            'URL',
+            'https://ibb.co/v4mx3MWz',
             'Chocolate with Peanutes',
             12.00, 
             '50mg',
@@ -21,7 +21,7 @@ async function productsSeed(){
         ),
         (
             'Moon Dust Gummies',
-            'URL',
+            'https://ibb.co/GfYctKRr',
             'Variety Pack',
             58.00,
             '200mg',
@@ -33,7 +33,7 @@ async function productsSeed(){
         ),
         (
             'Kush Drops',
-            'URL',
+            'https://ibb.co/zWtnLGqr',
             'Groovy Green Apple',
             16.00,
             '100mg',
