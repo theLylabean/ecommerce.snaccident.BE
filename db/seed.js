@@ -60,7 +60,7 @@ async function productSeed(){
         ),
         (
             'Terra Blueberry Bites',
-            'URL',
+            'https://ibb.co/9mCp6R9t',
             'Chocolate Covered Blueberry'
             7.99,
             '5mg',
@@ -75,7 +75,7 @@ async function productSeed(){
         ),
         (
             'Boom Gummies',
-            'URL',
+            'https://ibb.co/1JG2S65b',
             'Blueberry Lemonade',
             15.00,
             '100mg',
@@ -90,7 +90,7 @@ async function productSeed(){
         ),
         (
             'Nature''s Key',
-            'URL',
+            'https://ibb.co/6zVd5gS',
             'Tropical Nano Bites',
             17.00,
             '50mg',
@@ -113,7 +113,7 @@ async function productSeed(){
         ),
         (
             'Wyld Gummies',
-            'URL',
+            'https://ibb.co/d0PbCmCN',
             'Elderberry 5:1 CBN',
             36.00,
             '100mg',
@@ -127,7 +127,7 @@ async function productSeed(){
         ),
         (
             'Smokiez Edibles',
-            'URL',
+            'https://ibb.co/5hJtWC49',
             'Infused Lemonade 12oz Drink',
             15.00,
             '250mg',
@@ -144,7 +144,7 @@ async function productSeed(){
         ),
         (
             'DŌSD Edibles',
-            'URL',
+            'https://ibb.co/p6pcPcCX',
             'Watermelon Nano Bites',
             25.00,
             '120mg',
@@ -159,7 +159,7 @@ async function productSeed(){
         ),
         (
             'Smokies Edibles',
-            'URL',
+            'https://ibb.co/hF7ddn6Z',
             'Sour Watermelon Fruit Chews',
             10.00,
             '150mg',
