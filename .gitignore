@@ -133,4 +133,12 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
+
 .pnp.*
+
+# macOS system files
+.DS_Store
+.AppleDouble
+# VS Code settings
+.vscode/
+main
