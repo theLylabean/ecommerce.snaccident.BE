@@ -17,14 +17,16 @@ CREATE TABLE orders (
 );
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
-    image_url TEXT NOT NULL,
     title TEXT UNIQUE NOT NULL,
+    image_url TEXT NOT NULL,
+    flavor TEXT NOT NULL,
     price DECIMAL NOT NULL
-    pieces INTEGER NOT NULL,
+    dose TEXT NOT NULL,
+    total TEXT NOT NULL,
     quantity INTEGER NOT NULL,
     strain TEXT NOT NULL,
     potency TEXT NOT NULL,
-    description TEXT NOT NULL,
+    description TEXT NOT NULL
 );
 CREATE TABLE reviews(
     id SERIAL PRIMARY KEY,
