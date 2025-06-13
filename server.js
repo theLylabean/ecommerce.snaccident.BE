@@ -1,7 +1,9 @@
-import ordersRouter from "./api/orders.js";
-import usersRouter from "./api/users.js";
+import dotenv from "dotenv";
+import app from "./app.js";
 
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 
-
-app.use("/api/orders", ordersRouter); 
-app.use("/api/users", usersRouter); 
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
