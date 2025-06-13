@@ -184,3 +184,7 @@ async function seedOrders(){
 }
 
 finalSeed();
+
+const hello = () => {
+    'hello!'
+}
