@@ -21,6 +21,7 @@
   "homepage": "https://github.com/SpaceDust18/MarketBackEnd#readme",
   "keywords": [],
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.0"
