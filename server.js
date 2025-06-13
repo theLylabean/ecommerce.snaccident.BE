@@ -1,9 +1,9 @@
+import dotenv from "dotenv";
+import app from "./app.js";
 
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 
-
-nancy/reviews
-app.use("/api/orders", ordersRouter); 
-app.use("/api/users", usersRouter); 
-=======
-
-main
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
