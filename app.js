@@ -18,7 +18,8 @@ app.use(( req, res, next ) => {
 
 app.use("/api/orders", ordersRouter); 
 app.use("/api/users", usersRouter); 
-app.use('/products', productsRouter);
+app.use('/api/products', productsRouter);
+app.use("/api/reviews", reviewsRouter);
 
 app.use(( err, req, res, next ) => {
     console.error(err);
