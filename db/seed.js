@@ -2,12 +2,14 @@ import db from "./client.js";
 
 import { createUser } from "./queries/users";
 import { createOrder } from "./queries/users";
+import { createReview } from "./queries/reviews";
 
 const finalSeed = async() => {
 await db.connect();
 await seedUsers();
 await seedOrders();
 await productSeed();
+await seedReviews();
 await db.end();
 console.log("🌱 Database seeded.");
 }
@@ -191,6 +193,10 @@ async function seedOrders(){
 
 }
 
+async function seedReviews(){
+    await createReview({rating: "4", comment: "High was good, hybrids can be a hit or miss. These did not miss. I was basically on the Moon with how these made me feel. Had me thinking about the Moon being made out of cheese.", product_id: 2})
+    await createReview({rating: "5", comment: "Big fan of sativas. I had an amazing time with these. Listening to some pupmed up jams made this experience TOTALLY WICKED!", product_id: 6})
+    await createReview({rating: "5", comment: "Man oh MAN!!! I HOPE YOU LIKE BEING A COUCH POTATO! relaxing, chill, eased my anxities. Perfect for those who like to watch nature documenteries and be in awe of the beautful planet we live on", product_id: 10})
+}
 
 finalSeed();
-
