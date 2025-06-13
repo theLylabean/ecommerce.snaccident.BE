@@ -175,12 +175,22 @@ async function productSeed(){
     `
 }
 
-async function seedUsers(){
+async function seedUsers() {
+  console.log("Seeding users...");
 
+  await db.query(`DELETE FROM users;`);
+
+  await createUser('yoyo', 'pass123');
+  await createUser('yoni', 'password456');
+  await createUser('alem', 'secure789');
+
+  console.log("✅ Users seeded.");
 }
 
 async function seedOrders(){
 
 }
 
+
 finalSeed();
+
