@@ -3,6 +3,7 @@ import { verifyToken } from "../middleware.js";
 import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder } from "../db/queries/orders.js";
 
 const router = express.Router();
+const isValidDate = (date) => !isNaN(Date.parse(date));
 
 //GET/api/orders 
 router.get("/", verifyToken, async (req, res, next) => {
@@ -21,13 +22,9 @@ router.post("/", verifyToken, async(req, res, next) => {
         const { date, note } = req.body;
         const userId = req.user.id;
 
-        const isValidDate = (date) => {
-            return !isNaN(Date.parse(date));
-        }
-
-        if (!date || typeof userId !== "number") {
-            return res.status(400).json({ error: "Date is required and User ID must be a number." });
-        }
+        if (!date || !isValidDate(date)) {
+            return res.status(400).json({ error: "A valid date is required." });
+          }
         const newOrder = await createOrder({ date, note, userId });
         res.status(201).json(newOrder);       
     } catch (error) {
@@ -42,8 +39,8 @@ router.put("/:id", verifyToken, async(req, res, next) => {
         const { date, note } = req.body; 
         const userId = req.user.id; 
 
-        if (!date || typeof userId !== "number") {
-            return res.status(400).json({ error: "Date is required and User ID must be a number." });
+        if (!date || !isValidDate(date)) {
+            return res.status(400).json({ error: "A valid date is required." });
         }
         const order = await getOrdersById(id);
         if (!order) {
@@ -70,7 +67,7 @@ router.delete("/:id", verifyToken, async (req, res, next) => {
             return res.status(404).json({ error: "Order not found." });           
         }
         if (order.user_id !== userId) {
-            return res.status(403).json({ error: "Forbidden: This is not your order." });
+            return res.status(403).json({ error: "Forbidden: You do not have permission to access this resource." });
         }
         const deletedOrder = await deleteOrder(id, userId);
         res.json({ message: "Order deleted", order: deletedOrder });
