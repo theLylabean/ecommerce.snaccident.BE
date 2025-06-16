@@ -2,7 +2,7 @@ import db from './db/client.js';
 import productsRouter from './api/products.js';
 import ordersRouter from "./api/orders.js";
 import usersRouter from "./api/users.js";
-//import reviews router
+import reviewsRouter from './api/reviews.js';
 
 import express from 'express';
 const app = express();
