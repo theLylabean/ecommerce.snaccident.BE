@@ -195,10 +195,10 @@ async function seedOrders() {
 
     await db.query(`DELETE FROM orders`);
 
-    await createOrder({ date: '2024-06-01', note: 'Leave in front porch', userId: 1});
-    await createOrder({ date: '2024-06-05', note: 'Need delivery before Friday', userId: 2});
-    await createOrder({ date: '2024-06-10', note: null, userId: 1});
-
+    await createOrder({ date: '2024-06-01', note: 'Leave in front porch', userId: users[0].id });
+    await createOrder({ date: '2024-06-05', note: 'Need delivery before Friday', userId: users[1].id });
+    await createOrder({ date: '2024-06-10', note: null, userId: users[0].id });
+    
     console.log("Orders seeded successfully!");
 
 }
