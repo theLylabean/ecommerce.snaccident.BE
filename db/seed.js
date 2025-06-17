@@ -1,5 +1,4 @@
 import db from "./client.js";
-console.log("Seeding to DB:", process.env.DATABASE_URL);
 
 import { createUser } from "./queries/users.js";
 import { createOrder } from "./queries/orders.js";
@@ -8,8 +7,8 @@ import { createReview } from "./queries/reviews.js";
 //Add general try/catch block to final seed?
 const finalSeed = async () => {
     await db.connect();
-    // await seedUsers();
-    // await seedOrders();
+    await seedUsers();
+    await seedOrders();
     await productSeed();
     await seedReviews();
     await db.end();
@@ -176,34 +175,33 @@ async function productSeed() {
             Each of our mouth watering fruit chews contain 50 mg of THC, and made with our high clarity cannabis distillate for great taste.'
         )
     `;
-    await db.query(sql); // 🔥 THIS is what was missing
-    console.log("✅ Products seeded.");
+    await db.query(sql);
 }
 
-// async function seedUsers() {
-//     console.log("Seeding users...");
+async function seedUsers() {
+    console.log("Seeding users...");
 
-//     await db.query(`DELETE FROM users;`);
+    await db.query(`DELETE FROM users;`);
 
-//     await createUser('yoyo', 'pass123');
-//     await createUser('yoni', 'password456');
-//     await createUser('alem', 'secure789');
+    await createUser('yoyo', 'pass123');
+    await createUser('yoni', 'password456');
+    await createUser('alem', 'secure789');
 
-//     console.log("✅ Users seeded.");
-// }
+    console.log("✅ Users seeded.");
+}
 
-// async function seedOrders() {
-//     console.log("Seeding orders...");
+async function seedOrders() {
+    console.log("Seeding orders...");
 
-//     await db.query(`DELETE FROM orders`);
+    await db.query(`DELETE FROM orders`);
 
-//     await createOrder({ date: '2024-06-01', note: 'Leave in front porch', userId: 1});
-//     await createOrder({ date: '2024-06-05', note: 'Need delivery before Friday', userId: 2});
-//     await createOrder({ date: '2024-06-10', note: null, userId: 1});
+    await createOrder({ date: '2024-06-01', note: 'Leave in front porch', userId: 1});
+    await createOrder({ date: '2024-06-05', note: 'Need delivery before Friday', userId: 2});
+    await createOrder({ date: '2024-06-10', note: null, userId: 1});
 
-//     console.log("Orders seeded successfully!");
+    console.log("Orders seeded successfully!");
 
-// }
+}
 
 async function seedReviews() {
     await createReview({ rating: "4", comment: "High was good, hybrids can be a hit or miss. These did not miss. I was basically on the Moon with how these made me feel. Had me thinking about the Moon being made out of cheese.", product_id: 2 })
