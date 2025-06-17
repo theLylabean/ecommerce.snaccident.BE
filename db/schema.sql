@@ -9,18 +9,20 @@ CREATE TABLE users (
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL
 );
+
 CREATE TABLE orders (
  id SERIAL PRIMARY KEY,
  date DATE NOT NULL,
  note TEXT,
  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
+
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     title TEXT UNIQUE NOT NULL,
     image_url TEXT NOT NULL,
     flavor TEXT NOT NULL,
-    price DECIMAL NOT NULL
+    price DECIMAL NOT NULL,
     dose TEXT NOT NULL,
     total TEXT NOT NULL,
     quantity INTEGER NOT NULL,
@@ -28,6 +30,7 @@ CREATE TABLE products(
     potency TEXT NOT NULL,
     description TEXT NOT NULL
 );
+
 CREATE TABLE reviews(
     id SERIAL PRIMARY KEY,
     rating INTEGER NOT NULL,
