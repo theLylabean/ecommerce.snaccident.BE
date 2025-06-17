@@ -1,12 +1,12 @@
 import express from "express";
-import {getReviews, getReviewsById, createReview, updateReview, deleteReview} from '../db/queries/reviews.js';
-
 const router = express.Router();
 export default router;
 
+import {getReviews, getReviewsById, createReview, updateReview, deleteReview} from '../db/queries/reviews.js';
+
 router.get("/", async (req, res, next) => {
     try{
-        const reviews = req.params.id;
+        const reviews = await getReviews();
         return res.send(reviews);
     }catch(error){
         console.error("Could not fetch reviews");
