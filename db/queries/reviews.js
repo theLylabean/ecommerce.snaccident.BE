@@ -7,7 +7,7 @@ export async function getReviews(){
     `;
 
     const {rows: reviews} = await db.query(sql);
-    return getReviews;
+    return reviews;
 }
 
 export async function getReviewsById(id){

@@ -177,16 +177,18 @@ async function productSeed() {
     `;
     await db.query(sql);
 }
-
+const users = []
 async function seedUsers() {
     console.log("Seeding users...");
 
     await db.query(`DELETE FROM users;`);
 
-    await createUser('yoyo', 'pass123');
-    await createUser('yoni', 'password456');
-    await createUser('alem', 'secure789');
-
+    const user1 = await createUser('yoyo', 'pass123');
+    users.push(user1)
+    const user2 = await createUser('yoni', 'password456');
+    users.push(user2)
+    const user3 = await createUser('alem', 'secure789');
+    users.push(user3)
     console.log("✅ Users seeded.");
 }
 
