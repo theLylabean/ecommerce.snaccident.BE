@@ -21,7 +21,7 @@ async function productSeed() {
     INSERT INTO products (title, image_url, flavor, price, dose, total, quantity, strain, potency, description) VALUES
         (
             'Gem Stoned Chocolates', 
-            'https://ibb.co/v4mx3MWz',
+            'https://i.ibb.co/zVbhXtgf/430393125-500mg-gemstoned-png.jpg',
             'Chocolate with Peanutes',
             12.00, 
             '50mg',
@@ -33,7 +33,7 @@ async function productSeed() {
         ),
         (
             'Moon Dust Gummies',
-            'https://ibb.co/GfYctKRr',
+            'https://i.ibb.co/PsXw97gV/moondust-png.jpg',
             'Variety Pack',
             58.00,
             '200mg',
@@ -45,7 +45,7 @@ async function productSeed() {
         ),
         (
             'Kush Drops',
-            'https://ibb.co/zWtnLGqr',
+            'https://i.ibb.co/vCMwrZ0H/kushdrops-png.jpg',
             'Groovy Green Apple',
             16.00,
             '100mg',
@@ -62,7 +62,7 @@ async function productSeed() {
         ),
         (
             'Terra Blueberry Bites',
-            'https://ibb.co/9mCp6R9t',
+            'https://i.ibb.co/4w5FzBZd/terrabites-jpg.jpg',
             'Chocolate Covered Blueberry',
             7.99,
             '5mg',
@@ -77,7 +77,7 @@ async function productSeed() {
         ),
         (
             'Boom Gummies',
-            'https://ibb.co/1JG2S65b',
+            'https://i.ibb.co/CsK0r2ZW/boomgummies-jpg.jpg',
             'Blueberry Lemonade',
             15.00,
             '100mg',
@@ -92,7 +92,7 @@ async function productSeed() {
         ),
         (
             'Nature''s Key',
-            'https://ibb.co/6zVd5gS',
+            'https://i.ibb.co/5mt7VB3/natureskey-png.jpg',
             'Tropical Nano Bites',
             17.00,
             '50mg',
@@ -115,7 +115,7 @@ async function productSeed() {
         ),
         (
             'Wyld Gummies',
-            'https://ibb.co/d0PbCmCN',
+            'https://i.ibb.co/xS1m9F9n/wyldgummies-png.jpg',
             'Elderberry 5:1 CBN',
             36.00,
             '100mg',
@@ -129,7 +129,7 @@ async function productSeed() {
         ),
         (
             'Smokiez Edibles',
-            'https://ibb.co/5hJtWC49',
+            'https://i.ibb.co/nMKZs4m0/infusedlemonade-png.jpg',
             'Infused Lemonade 12oz Drink',
             15.00,
             '250mg',
@@ -146,7 +146,7 @@ async function productSeed() {
         ),
         (
             'DŌSD Edibles',
-            'https://ibb.co/p6pcPcCX',
+            'https://i.ibb.co/9mj6v6RY/dosdnanobites-png.jpg',
             'Watermelon Nano Bites',
             25.00,
             '120mg',
@@ -161,7 +161,7 @@ async function productSeed() {
         ),
         (
             'Smokies Edibles',
-            'https://ibb.co/hF7ddn6Z',
+            'https://i.ibb.co/LdkggqFJ/sourfruitchews-jpg.jpg',
             'Sour Watermelon Fruit Chews',
             10.00,
             '150mg',
