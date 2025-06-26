@@ -141,15 +141,29 @@ router.get('/reviews', verifyToken, async (req, res, next) => {
   }
 });
 
-router.post('/addtocart', verifyToken, async ( req, res, next ) => {
-  const id = Number (req.user.id)
-  const { productId } = req.body;
-  const added = await db.query(`
-    INSERT INTO carts (user_id, product_id)
-    VALUES ($1, $2)
-    RETURNING *;`, [id, productId])
-    res.status(201).json(added)
-})
+router.post('/addtocart', verifyToken, async (req, res) => {
+    const { productId } = req.body;
+    const userId = req.user?.id;
+
+    try {
+        // Validate input
+        if (!productId || !userId) {
+            return res.status(400).json({ error: "Missing productId or userId" });
+        }
+console.log('decoded user:', req.user)
+        const added = await db.query(`
+            INSERT INTO carts (user_id, product_id)
+            VALUES ($1, $2)
+            RETURNING *
+        `, [userId, productId]);
+
+        res.status(201).json(added.rows[0]);
+    } catch (err) {
+        console.error("Error adding to cart:", err);
+        res.status(500).json({ error: "Failed to add to cart" });
+    }
+});
+
 
 // GET /users/:id - Get user by ID (protected)
 router.get('/:id', verifyToken, async (req, res, next) => {

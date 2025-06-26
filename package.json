@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "db:schema": "psql -d marketbackend -f db/schema.sql",
+    "db:schema": "psql -d MarketBackEnd -f db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
   },

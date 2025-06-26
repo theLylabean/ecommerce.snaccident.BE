@@ -12,20 +12,6 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 
-CREATE TABLE orders (
- id SERIAL PRIMARY KEY,
- date DATE NOT NULL,
- note TEXT,
- user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE order_items (
-  id SERIAL PRIMARY KEY,
-  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
-  product_id INTEGER NOT NULL REFERENCES products(id),
-  quantity INTEGER NOT NULL DEFAULT 1
-);
-
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     title TEXT UNIQUE NOT NULL,
@@ -40,10 +26,24 @@ CREATE TABLE products(
     description TEXT NOT NULL
 );
 
+CREATE TABLE orders (
+ id SERIAL PRIMARY KEY,
+ date DATE NOT NULL,
+ note TEXT,
+ user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE carts (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  quantity INTEGER NOT NULL DEFAULT 1
 );
 
 CREATE TABLE reviews(
