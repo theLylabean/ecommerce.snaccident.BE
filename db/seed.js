@@ -8,10 +8,9 @@ import { createReview } from "./queries/reviews.js";
 const finalSeed = async () => {
     await db.connect();
     await seedUsers();
-    await seedOrders();
     await productSeed();
-    await seedReviews();
-    await db.end();
+    await seedOrders();
+    // await seedReviews();
 }
 
 async function productSeed() {
@@ -211,5 +210,7 @@ async function seedReviews() {
     await createReview({ rating: "5", comment: "Man oh MAN!!! I HOPE YOU LIKE BEING A COUCH POTATO! relaxing, chill, eased my anxities. Perfect for those who like to watch nature documenteries and be in awe of the beautful planet we live on", product_id: 10 })
 }
 
-finalSeed();
+await finalSeed();
+await seedReviews();
 console.log("🌱 Database seeded.");
+await db.end();

@@ -144,4 +144,12 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
   }
 });
 
+router.get('/reviews', verifyToken, async( req, res, next ) => {
+  try {
+    const review = await db.query(`SELECT * FROM reviews WHERE  `)
+  } catch (error) {
+    
+  }
+})
+
 export default router;
