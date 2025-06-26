@@ -1,11 +1,13 @@
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS products CASCADE;
+/* List dependent tables first(order_items, reviews) and foundational tables like users last.*/
+DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username TEXT NOT NULL,
+  username TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL
 );
 
@@ -14,6 +16,13 @@ CREATE TABLE orders (
  date DATE NOT NULL,
  note TEXT,
  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  quantity INTEGER NOT NULL DEFAULT 1
 );
 
 CREATE TABLE products(
