@@ -144,12 +144,20 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
   }
 });
 
-router.get('/reviews', verifyToken, async( req, res, next ) => {
+router.get('/reviews', verifyToken, async (req, res, next) => {
   try {
-    const review = await db.query(`SELECT * FROM reviews WHERE  `)
+    const userId = req.user.id;
+    const { rows: reviews } = await db.query(
+      `SELECT * FROM reviews WHERE user_id = $1`,
+      [userId]
+    );
+
+    res.status(200).json(reviews);
   } catch (error) {
-    
+    console.error('Error fetching reviews:', error);
+    res.status(500).send({ message: 'Server error fetching reviews.' });
   }
-})
+});
+
 
 export default router;
