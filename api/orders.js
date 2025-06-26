@@ -32,6 +32,24 @@ router.post("/", verifyToken, async(req, res, next) => {
     }
 }); 
 
+//POST /api/orders/:orderId/items
+router.post('/:orderId/items', verifyToken, async ( req, res, next ) => {
+    const { productId, quantity } = req.body;
+    const { orderId } = req.params;
+
+    try {
+        const result = await db.query(
+            `INSERT INTO order_items (order_id, product-id, quantity)
+            VALUES ($1, $2, $3)
+            RETURNING *;`,
+            [orderId, productId, quantity]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        next(error);
+    }
+})
+
 //PUT/api/orders/:id
 router.put("/:id", verifyToken, async(req, res, next) => {
     try {
