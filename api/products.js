@@ -28,17 +28,14 @@ router.get('/:id', async( req, res, next ) => {
 
 router.get('/:id/reviews', verifyToken, async( req, res, next ) => {
     const product_id = parseInt(req.params.product_id);
-    console.log('made it');
     try {
         if(!Number.isInteger(product_id) && product_id < 0){
             return res.status(400).send({ error: 'Please send a valid number.' });
         }
         const product = await getProductReviewsById(product_id);
-        console.log(product)
         if(!product){
             return res.status(404).send({ error: 'Product_ID not found.' });
         }
-        console.log(product);
         res.send(product);
     } catch (error) {
         console.log(error);
