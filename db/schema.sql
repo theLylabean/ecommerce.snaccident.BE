@@ -1,7 +1,8 @@
 /* List dependent tables first(order_items, reviews) and foundational tables like users last.*/
-DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS carts;
+DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
@@ -43,7 +44,7 @@ CREATE TABLE carts (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE reviews(
     id SERIAL PRIMARY KEY,
