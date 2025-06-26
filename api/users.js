@@ -64,19 +64,6 @@ router.get('/', verifyToken, async (req, res, next) => {
   }
 });
 
-// GET /users/:id - Get user by ID (protected)
-router.get('/:id', verifyToken, async (req, res, next) => {
-  try {
-    const user = await getUserById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // POST /users - Create a new user
 router.post('/', newUserCheck, async (req, res, next) => {
   try {
@@ -145,17 +132,35 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
 });
 
 router.get('/reviews', verifyToken, async (req, res, next) => {
+  const id = Number(req.user.id)
   try {
-    const userId = req.user.id;
-    const { rows: reviews } = await db.query(
-      `SELECT * FROM reviews WHERE user_id = $1`,
-      [userId]
-    );
-
-    res.status(200).json(reviews);
+    const review = await db.query(`SELECT * FROM reviews WHERE user_id = $1;`, [id])
+    res.status(201).json(review.rows)
   } catch (error) {
-    console.error('Error fetching reviews:', error);
-    res.status(500).send({ message: 'Server error fetching reviews.' });
+
+  }
+});
+
+router.post('/addtocart', verifyToken, async ( req, res, next ) => {
+  const id = Number (req.user.id)
+  const { productId } = req.body;
+  const added = await db.query(`
+    INSERT INTO carts (user_id, product_id)
+    VALUES ($1, $2)
+    RETURNING *;`, [id, productId])
+    res.status(201).json(added)
+})
+
+// GET /users/:id - Get user by ID (protected)
+router.get('/:id', verifyToken, async (req, res, next) => {
+  try {
+    const user = await getUserById(Number(req.params.id));
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    next(error);
   }
 });
 

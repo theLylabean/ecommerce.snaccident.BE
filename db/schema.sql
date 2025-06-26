@@ -39,6 +39,12 @@ CREATE TABLE products(
     description TEXT NOT NULL
 );
 
+CREATE TABLE carts (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  product_id INTEGER REFERENCES products(id) ON DELETE CASCADE
+)
+
 CREATE TABLE reviews(
     id SERIAL PRIMARY KEY,
     rating INTEGER NOT NULL,

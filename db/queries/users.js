@@ -19,6 +19,7 @@ export async function getAllUsers() {
 
 // READ - Get one user by ID
 export async function getUserById(id) {
+  console.log(id)
   const { rows } = await client.query(
     `SELECT * FROM users WHERE id = $1;`,
     [id]
