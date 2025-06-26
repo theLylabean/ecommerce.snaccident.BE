@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username TEXT NOT NULL,
+  username TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL
 );
 
@@ -14,6 +14,13 @@ CREATE TABLE orders (
  date DATE NOT NULL,
  note TEXT,
  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  quantity INTEGER NOT NULL DEFAULT 1
 );
 
 CREATE TABLE products(
