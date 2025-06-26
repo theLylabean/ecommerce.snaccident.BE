@@ -30,30 +30,36 @@ export async function getProductsById(id){
 
 export async function getProductReviewsById(product_id){
     const productId = Number(product_id);
+    console.log(productId)
     try {
         const result = await db.query(
             `SELECT * FROM reviews WHERE product_id = $1;`, [productId]
         );
-        return result.rows[0]
+        return result.rows;
     } catch (error) {
-        if(isNaN(reviewId)){
-            throw new Error( 'Invalid review ID.', error );
+        if(isNaN(productId)){
+            throw new Error( 'Invalid ID.', error );
         }
         console.error( 'Error getting product review by ID.', error );
         throw error;
     }
 }
 
-export async function createProductReviews({ product_id }){
+export async function createProductReviews({ rating, comment, product_id, user_id }){
+    const ratingInt = Number(rating);
+    const productId = Number(product_id);
+    console.log('createProductReviews 50: ', productId);
     try {
-        const result = db.query(
+        const result = await db.query(
             `
-                INSERT INTO reviews (rating, comment, product_id)
-                VALUES ($1, $2, $3)
+                INSERT INTO reviews (rating, comment, product_id, user_id)
+                VALUES ($1, $2, $3, $4)
                 RETURNING *;
             `,
-            [rating, comment, product_id]
+            [ratingInt, comment, productId, user_id]
         );
+        console.log('createProductReviews 53: ', result);
+        console.log('createProductReviews 63: ', result.rows);
         return result.rows;
     } catch (error) {
         console.error( 'Error getting products:', error );
