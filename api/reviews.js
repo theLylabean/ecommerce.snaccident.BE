@@ -30,23 +30,6 @@ router.get("/:id", async (req, res, next) => {
     }
 });
 
-router.post("/", async (req, res, next) => {
-    try{
-        if(!req.body){
-            return res.status(400).send({error: "Missing req.body"});
-        }
-
-        const {rating, comment, product_id} = req.body;
-        if(!rating || !comment || !product_id){
-            return res.status(400).send({error: "Missing required params"});
-        }
-
-        const review = await createReview({rating, comment, product_id});
-        res.status(201).send(review);
-    }catch(error){
-        next(error)
-    }
-});
 
 router.put("/:id", async (req, res, next) => {
     try{
