@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import db from './db/client.js';
 
 const SECRET = process.env.JWT_SECRET || 'supersecretkey';
 

@@ -1,8 +1,8 @@
 /* List dependent tables first(order_items, reviews) and foundational tables like users last.*/
+DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS products CASCADE;
-DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
@@ -44,5 +44,6 @@ CREATE TABLE reviews(
     rating INTEGER NOT NULL,
     comment TEXT,
     product_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
