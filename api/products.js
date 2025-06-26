@@ -27,9 +27,9 @@ router.get('/:id', async( req, res, next ) => {
 })
 
 router.get('/:id/reviews', verifyToken, async( req, res, next ) => {
-    const product_id = parseInt(req.params.product_id);
+    const product_id = parseInt(req.params.id);
     try {
-        if(!Number.isInteger(product_id) && product_id < 0){
+        if(!Number.isInteger(product_id) || product_id < 0){
             return res.status(400).send({ error: 'Please send a valid number.' });
         }
         const product = await getProductReviewsById(product_id);
