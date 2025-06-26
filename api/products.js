@@ -4,7 +4,7 @@ import express from 'express';
 const router = express.Router();
 export default router;
 
-router.get('/', async( req, res, next ) => {
+router.get('/', async( req, res, next ) => { 
     const products = await getProducts();
     res.send(products);
 })

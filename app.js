@@ -3,7 +3,7 @@ import productsRouter from './api/products.js';
 import ordersRouter from "./api/orders.js";
 import usersRouter from "./api/users.js";
 import reviewsRouter from './api/reviews.js';
-
+import cors from 'cors';
 import express from 'express';
 const app = express();
 export default app;
@@ -11,6 +11,7 @@ export default app;
 await db.connect();
 
 app.use(express.json());
+app.use(cors());
 app.use(( req, res, next ) => {
     console.log(req.method, req.originalUrl);
     next();
