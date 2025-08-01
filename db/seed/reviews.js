@@ -2,7 +2,7 @@ import db from '../client.js';
 
 export async function reviewsSeed() {
     try {
-        await db.query('TRUNCATE orders RESTART IDENTITY');
+        // await db.query('TRUNCATE orders RESTART IDENTITY');
         await db.query(`
             INSERT INTO reviews (rating, comment, product_id, user_id) VALUES
             (

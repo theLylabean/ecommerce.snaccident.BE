@@ -7,7 +7,7 @@ export async function usersSeed() {
         const justinpassword = await bcrypt.hash('Triforce3!', 5);
         const tylerpassword = await bcrypt.hash('421aters', 5);
 
-        await db.query('TRUNCATE users RESTART IDENTITY');
+        // await db.query('TRUNCATE users RESTART IDENTITY CASCADE');
         await db.query(`
             INSERT INTO users (first_name, last_name, email, username, password) VALUES
                 ($1, $2, $3, $4, $5),
@@ -32,7 +32,7 @@ export async function usersSeed() {
                     'drjustus',
                     justinpassword
                 ]);
-            console.log('🌱  Users seeded successfull!');
+            console.log('🌱  Users seeded successfullY!');
     } catch (error) {
         console.error('❌ Error seeding Users: ', error);
     }
