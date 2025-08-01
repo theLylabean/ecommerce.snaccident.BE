@@ -6,20 +6,20 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "db:schema": "psql -d snaccident -f db/schema.sql",
-    "db:seed": "node --env-file=.env db/seed.js",
+    "db:schema": "psql -d snaccident -f db/finalSchema.sql",
+    "db:seed": "node --env-file=.env db/finalSeed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SpaceDust18/marketbackend.git"
+    "url": "git+https://github.com/theLylabean/ecommerce.snaccident.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SpaceDust18/marketbackend/issues"
+    "url": "https://github.com/theLylabean/ecommerce.snaccident/issues"
   },
-  "homepage": "https://github.com/SpaceDust18/marketbackend#readme",
+  "homepage": "https://github.com/theLylabean/ecommerce.snaccident#readme",
   "keywords": [],
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -27,6 +27,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "validator": "^13.15.15"
   }
 }
