@@ -1,4 +1,4 @@
-import { createProductReviews, getProductReviewsById, getProducts, getProductsById } from '../db/queries/productqueries.js';
+import { createProductReviews, getProductReviewsById, getProducts, getProductsById } from '../db/queries/productQueries.js';
 import { verifyToken } from '../middleware.js';
 import express from 'express';
 const router = express.Router();

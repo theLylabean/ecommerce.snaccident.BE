@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import {getReviews, getReviewsById, createReview, updateReview, deleteReview} from '../db/queries/reviews.js';
+import {getReviews, getReviewsById, createReview, updateReview, deleteReview} from '../db/queries/reviewsQueries.js';
 
 router.get("/", async (req, res, next) => {
     try{

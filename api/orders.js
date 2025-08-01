@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middleware.js";
-import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder } from "../db/queries/orders.js";
+import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder } from "../db/queries/ordersQueries.js";
 
 const router = express.Router();
 const isValidDate = (date) => !isNaN(Date.parse(date));
