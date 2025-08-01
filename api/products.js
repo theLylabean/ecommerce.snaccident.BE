@@ -1,5 +1,5 @@
 import { createProductReviews, getProductReviewsById, getProducts, getProductsById } from '../db/queries/productQueries.js';
-import { verifyToken } from '../middleware.js';
+import { verifyToken } from '../auth/middleware/middleware/middleware.js';
 import express from 'express';
 const router = express.Router();
 export default router;

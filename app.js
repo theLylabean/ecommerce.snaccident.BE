@@ -1,7 +1,7 @@
 import db from './db/client.js';
 import productsRouter from './api/products.js';
 import ordersRouter from "./api/orders.js";
-import usersRouter from "./api/users.js";
+import authRouter from './auth/index.js';
 import reviewsRouter from './api/reviews.js';
 import cors from 'cors';
 import express from 'express';
@@ -17,8 +17,8 @@ app.use(( req, res, next ) => {
     next();
 })
 
+app.use("/auth", authRouter); 
 app.use("/api/orders", ordersRouter); 
-app.use("/api/users", usersRouter); 
 app.use('/api/products', productsRouter);
 app.use("/api/reviews", reviewsRouter);
 
