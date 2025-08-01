@@ -6,9 +6,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "db:schema": "psql -d snaccident -f db/finalSchema.sql",
-    "db:seed": "node --env-file=.env db/finalSeed.js",
-    "db:reset": "npm run db:schema && npm run db:seed"
+    "db:schema": "psql -d snaccident -f db/schema/finalSchema.sql",
+    "db:seed": "node --env-file=.env db/seed/finalSeed.js",
+    "db:reset": "npm run db:schema && npm run db:seed",
+    "db:testseed": "node --env-file=.env db/seed/testSeed.js"
   },
   "repository": {
     "type": "git",
