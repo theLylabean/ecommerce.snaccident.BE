@@ -64,19 +64,6 @@ router.get('/', verifyToken, async (req, res, next) => {
   }
 });
 
-// GET /users/:id - Get user by ID (protected)
-router.get('/:id', verifyToken, async (req, res, next) => {
-  try {
-    const user = await getUserById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // POST /users - Create a new user
 router.post('/', newUserCheck, async (req, res, next) => {
   try {
@@ -144,12 +131,52 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
   }
 });
 
-router.get('/reviews', verifyToken, async( req, res, next ) => {
+router.get('/reviews', verifyToken, async (req, res, next) => {
+  const id = Number(req.user.id)
   try {
-    const review = await db.query(`SELECT * FROM reviews WHERE  `)
+    const review = await db.query(`SELECT * FROM reviews WHERE user_id = $1;`, [id])
+    res.status(201).json(review.rows)
   } catch (error) {
-    
+
   }
-})
+});
+
+router.post('/addtocart', verifyToken, async (req, res) => {
+    const { productId } = req.body;
+    const userId = req.user?.id;
+
+    try {
+        // Validate input
+        if (!productId || !userId) {
+            return res.status(400).json({ error: "Missing productId or userId" });
+        }
+console.log('decoded user:', req.user)
+        const added = await db.query(`
+            INSERT INTO carts (user_id, product_id)
+            VALUES ($1, $2)
+            RETURNING *
+        `, [userId, productId]);
+
+        res.status(201).json(added.rows[0]);
+    } catch (err) {
+        console.error("Error adding to cart:", err);
+        res.status(500).json({ error: "Failed to add to cart" });
+    }
+});
+
+
+// GET /users/:id - Get user by ID (protected)
+router.get('/:id', verifyToken, async (req, res, next) => {
+  try {
+    const user = await getUserById(Number(req.params.id));
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export default router;

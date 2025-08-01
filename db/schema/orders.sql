@@ -1,0 +1,6 @@
+CREATE TABLE orders (
+ id SERIAL PRIMARY KEY,
+ date DATE NOT NULL,
+ note TEXT,
+ user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
