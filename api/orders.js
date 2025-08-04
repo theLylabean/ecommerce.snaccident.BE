@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../auth/middleware/middleware/middleware.js";
+import { verifyToken } from "../auth/middleware/middleware.js";
 import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder } from "../db/queries/ordersQueries.js";
 
 const router = express.Router();

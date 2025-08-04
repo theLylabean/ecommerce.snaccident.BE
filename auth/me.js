@@ -1,7 +1,7 @@
 import express from 'express';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import verifyToken from './middleware/verifyToken.js';
+import { verifyToken } from './middleware/middleware.js';
 import { deleteUser, getUserById, updateUser } from '../db/queries/usersQueries.js';
 const router = express.Router();
 
