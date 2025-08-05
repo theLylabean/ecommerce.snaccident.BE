@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../auth/middleware/middleware.js";
-import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder } from "../db/queries/ordersQueries.js";
+import { getOrdersByUser, getOrdersById, createOrder, updateOrder, deleteOrder, addToCartQuery } from "../db/queries/ordersQueries.js";
 
 const router = express.Router();
 const isValidDate = (date) => !isNaN(Date.parse(date));
@@ -93,5 +93,27 @@ router.delete("/:id", verifyToken, async (req, res, next) => {
         next(error);
     }
 })
+
+// Add to Cart
+router.post('/addtocart', verifyToken, async (req, res) => {
+    try {
+        console.log('🛒 ADD TO CART HIT');
+        console.log('👉 req.user:', req.user);
+        console.log('👉 req.body:', req.body);
+
+        const { productId } = req.body;
+        const userId = req.user?.id;
+        // Validate input
+        if (!productId || !userId) {
+            console.warn('🚫 Missing userId or productId')
+            return res.status(400).json({ error: "Missing productId or userId" });
+        }
+        const addedItem = addToCartQuery(userId, productId);
+        res.status(201).json(addedItem);
+    } catch (error) {
+        console.error('❌ Error adding to cart: ', error);
+        res.status(500).json({ error: 'Failed to add to cart.' });
+    }
+});
 
 export default router; 

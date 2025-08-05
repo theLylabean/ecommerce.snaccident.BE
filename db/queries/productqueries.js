@@ -7,7 +7,7 @@ export async function getProducts(){
         );
         return result.rows;
     } catch (error) {
-        console.error( 'Error getting products:', error );
+        console.error({ error: 'Error getting products:' });
         throw error;
     }
 }
@@ -23,7 +23,7 @@ export async function getProductsById(id){
         if(isNaN(productId)){
             throw new Error('Invalid product ID.');
         }
-        console.error( 'Error getting product by ID.', error );
+        console.error({ error: 'Error getting product by ID.', });
         throw error;
     }
 }
@@ -40,7 +40,7 @@ export async function getProductReviewsById(product_id){
         if(isNaN(productId)){
             throw new Error( 'Invalid ID.', error );
         }
-        console.error( 'Error getting product review by ID.', error );
+        console.error({ error: 'Error getting product review by ID.' });
         throw error;
     }
 }
@@ -58,11 +58,9 @@ export async function createProductReviews({ rating, comment, product_id, user_i
             `,
             [ratingInt, comment, productId, user_id]
         );
-        console.log('createProductReviews 53: ', result);
-        console.log('createProductReviews 63: ', result.rows);
         return result.rows;
     } catch (error) {
-        console.error( 'Error getting products:', error );
+        console.error({ error: 'Error creating new product review: ' });
         throw error;
     }
 }

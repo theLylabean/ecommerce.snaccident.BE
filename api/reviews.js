@@ -1,8 +1,9 @@
+import {getReviews, getReviewsById, updateReview, deleteReview} from '../db/queries/reviewsQueries.js';
 import express from "express";
 const router = express.Router();
 export default router;
 
-import {getReviews, getReviewsById, createReview, updateReview, deleteReview} from '../db/queries/reviewsQueries.js';
+
 
 router.get("/", async (req, res, next) => {
     try{
@@ -13,23 +14,22 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:user_id', async (req, res, next) => {
     try{
-        const id = req.params.id;
-        if(!Number.isInteger(id) && id < 0){
-            return res.status(400).send({error: "Review not found"});
+        const user_id = Number(req.params.user_id);
+        if(isNaN(user_id) || user_id < 0){
+            return res.status(400).send({ error: 'Review not found.' });
         }
 
-        const review = await getReviewsById(id);
-        if(!review){
-            return res.status(404).send({error: "Forbidden: Review not found"});
+        const review = await getReviewsById(user_id);
+        if(review.length === 0){
+            return res.status(404).send({ error: 'No reviews found for this user.' });
         }
         res.send(review);
     }catch(error){
         next(error);
     }
 });
-
 
 router.put("/:id", async (req, res, next) => {
     try{

@@ -6,3 +6,4 @@
 \i db/schema/carts.sql
 \i db/schema/reviews.sql
 \i db/schema/orderItems.sql
+\i db/schema/cartItems.sql

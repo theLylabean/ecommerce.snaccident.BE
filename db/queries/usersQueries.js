@@ -1,4 +1,4 @@
-import client from '../client.js';
+import db from '../client.js';
 
 // CREATE a new user
 export async function createUsers (first_name, last_name, email, username, password) {
@@ -20,7 +20,8 @@ export async function createUsers (first_name, last_name, email, username, passw
 export async function newUsernameCheck (username) {
   try {
     const result = await db.query(
-      `SELECT * FROM  users WHERE username =$1`, [username]
+      `SELECT * FROM  users WHERE username =$1`, 
+      [username]
     );
     return result.rows[0];
   } catch (error) {
@@ -56,18 +57,13 @@ export async function getLogin (username) {
   }
 }
 
-// READ - Get all users
-export async function getAllUsers () {
-  const { rows } = await client.query(`SELECT * FROM users;`);
-  return rows;
-}
-
-// READ - Get one user by ID
+// GET user by ID
 export async function getUserById(id) {
   try {
     const result = await db.query(`
       SELECT * FROM users WHERE id = $1
-      `, [id]
+      `, 
+      [id]
     );
     return result.rows[0];
   } catch (error) {
@@ -125,6 +121,21 @@ export async function deleteUser (id) {
     return result.rows[0];
   } catch (error) {
     console.error('Error deleting user: ', error.messages);
+    throw error;
+  }
+}
+
+// GET cart items for User
+export async function getCartItems (user_id) {
+  try {
+    const result = await db.query(`
+      SELECT * FROM cart_items WHERE user_id = $1
+      `,
+    [user_id]
+  );
+  return result.rows;
+  } catch (error) {
+    console.error({ error: '❌ Error getting cart items for User.' });
     throw error;
   }
 }

@@ -2,33 +2,24 @@ import express from 'express';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import { verifyToken } from './middleware/middleware.js';
-import { deleteUser, getUserById, updateUser } from '../db/queries/usersQueries.js';
+import { deleteUser, getCartItems, getUserById, updateUser } from '../db/queries/usersQueries.js';
 const router = express.Router();
 
+// Get User By Id
 router.get('/', verifyToken, async ( req, res, next ) => {
-  try {
-    const user = req.user;
-    res.status(201).json(user);
-  } catch (error) {
-    console.error(error)
-    res.json(error);
-  }
-})
-
-router.get('/:id', verifyToken, async ( req, res, next ) => {
     try {
-        const { id } = req.params;
-        const user = await getUserById(id);
+        const user = await getUserById(req.user.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
+          return res.status(404).json({ message: 'User not found.' });
         }
         res.json(user);
     } catch (error) {
         console.error('❌ Error in GET /auth/account/:id route:', error.message);
-        res.status(500).json({ message: 'Failed to get user by ID.' });
+        res.status(500).json({ message: 'Failed to get user by ID. Please try again.' });
     }
-})
+});
 
+// Update User Info
 router.patch('/:id', verifyToken, async (req, res, next) => {
   const { id } = req.params;
   const { first_name, last_name, email, username, password } = req.body;
@@ -53,7 +44,7 @@ router.patch('/:id', verifyToken, async (req, res, next) => {
       if (!validator.isStrongPassword(password)) {
         return res.status(400).json({
           message:
-            'Password must be at least 8 characters long and include a number, a symbol, an uppercase, and a lowercase letter.',
+            'Password must be at least 8 characters long and include a number, a symbol, an uppercase, and a lowercase letter.'
         });
       }
       hashedPassword = await bcrypt.hash(password, 10);
@@ -72,10 +63,11 @@ router.patch('/:id', verifyToken, async (req, res, next) => {
     res.json(updatedUser);
   } catch (error) {
     console.error('❌ Error in PATCH /auth/account/:id route:', error.message);
-    res.status(500).json({ message: 'Failed to update user.' });
+    res.status(500).json({ message: 'Failed to update user. Please try again.' });
   }
 });
 
+// Delete User
 router.delete('/:id', verifyToken, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -86,7 +78,21 @@ router.delete('/:id', verifyToken, async (req, res, next) => {
     return res.json({ message: 'User deleted successfully.' });
   } catch (error) {
     console.error('❌ Error in DELETE /auth/account/:id:', error.message);
-    return res.status(500).json({ message: 'Failed to delete user.' });
+    return res.status(500).json({ message: 'Failed to delete user. Please try again.' });
+  }
+});
+
+router.get('/cartItems', verifyToken, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const cartItems = await getCartItems(id);
+    if (!cartItems || !cartItems === 0) {
+      return res.status(404).json({ message: 'No cart items found for this user.' });
+    }
+    return res.json(cartItems);
+  } catch (error) {
+    console.error({ error: '❌  Error retrieving cart items for this user.' });
+    res.status(500).json({ message: 'Failed to retrieve cart items. Please try again.' })
   }
 });
 

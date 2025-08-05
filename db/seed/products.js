@@ -2,7 +2,7 @@ import db from '../client.js';
 
 export async function productsSeed() {
     try {
-        // await db.query('TRUNCATE products RESTART IDENTITY CASCADE');
+        await db.query('TRUNCATE products RESTART IDENTITY CASCADE');
         await db.query(`
             INSERT INTO products (title, image_url, flavor, price, dose, total, quantity, strain, potency, description) VALUES
                 (
